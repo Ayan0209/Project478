@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP Comparison</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .chart {
+            width: 45%;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chart-container">
+    <div id="us-chart" class="chart"></div>
+    <div id="context-text">
+        <p>This chart compares the GDP of the United States and India over the years from 1990 to 2017. Red is United States, Blue is India.</p>
+    </div>
+    <div id="india-chart" class="chart"></div>
+</div>
+
+<script>
+    // Provided GDP data for each country
+    var indiaData = [320979026420.04, 270105341879.23, 288208066640.58, 279295644530.09, 327275583539.56, 360281907854.99, 392896860670.89, 415867567334.19, 421351318896.87, 458820417337.81, 468394937262.37, 485441014538.64, 514937948870.08, 607699285433.87, 709148514804.66, 820381595512.90, 940259888792.14, 1216736448906.29, 1198895147694.77, 1341888016988.57, 1675615502766.20, 1823051829894.55, 1827637579584.79, 1856721494834.64, 2039126469963.35, 2103588347241.77, 2294796889945.04, 2651474263257.15];
+    var usData = [5963144000000.00,	6158129000000.00,	6520327000000.00,	6858559000000.00,	7287236000000.00,	7639749000000.00,	8073122000000.00,	8577554457000.00,	9062818202000.00,	9631174489000.00,	10250947997000.00,	10581929774000.00,	10929112955000.00,	11456442041000.00,	12217193198000.00,	13039199193000.00,	13815586948000.00,	14474226905000.00,	14769857911000.00,	14478064934000.00,	15048964444000.00,	15599728123000.00,	16253972230000.00,	16843190993000.00,	17550680174000.00,	18206020741000.00,	18695110842000.00,	19477336549000.00];
+    // Set up the chart dimensions
+    var width = 500;
+        var height = 400;
+        var barWidth = width / indiaData.length;
+
+        // Create an SVG element
+        var Indiasvg = d3.select("#india-chart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var USsvg = d3.select("#us-chart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        // Create bars for India
+        Indiasvg.selectAll("rect.india")
+            .data(indiaData)
+            .enter()
+            .append("rect")
+            .attr("class", "india")
+            .attr("x", function (d, i) { return i * barWidth; })
+            .attr("y", function (d) { return height - d / 10e9; }) // Scaling down for better visualization
+            .attr("width", barWidth - 1)
+            .attr("height", function (d) { return d / 10e9; }) // Scaling down for better visualization
+            .attr("fill", "blue");
+
+        // Create bars for the US
+        USsvg.selectAll("rect.us")
+            .data(usData)
+            .enter()
+            .append("rect")
+            .attr("class", "us")
+            .attr("x", function (d, i) { return i * barWidth; })
+            .attr("y", function (d) { return height - d / 10e10; }) // Scaling down for better visualization
+            .attr("width", barWidth - 1)
+            .attr("height", function (d) { return d / 10e10; }) // Scaling down for better visualization
+            .attr("fill", "red");
+</script>
+
+</body>
+</html>

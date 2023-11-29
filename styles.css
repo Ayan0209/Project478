@@ -1,0 +1,39 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.section {
+  display: flex;
+  height: 100vh; /* Set each section to take the full height of the viewport */
+  overflow: hidden;
+}
+
+.left-panel,
+.right-panel,
+.center-panel {
+  width: 33.33%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.left-panel {
+  background-color: #f0f0f0;
+  overflow: none; /* Allow vertical scrolling only if content overflows */
+}
+
+.right-panel {
+  background-color: #e0e0e0;
+  overflow: none; /* Allow vertical scrolling only if content overflows */
+}
+
+.center-panel {
+  background-color: #fff;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+h2 {
+  margin-top: 0;
+}
